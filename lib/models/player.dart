@@ -7,6 +7,7 @@ class Player {
   double? top;
   int? score;
   int? playerNo;
+  final bool isMe;
 
   Player({
     required this.nickname,
@@ -17,6 +18,7 @@ class Player {
     this.top,
     this.score,
     this.playerNo,
+    required this.isMe,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class Player {
       'top':top,
       'score':score,
       'playerNo':playerNo,
+      'isMe': isMe,
     };
   }
 
@@ -42,6 +45,7 @@ class Player {
       top: map['top'] ?? 500,
       score: map['score'] ?? 0,
       playerNo: map['playerNo'] ?? 1,
+      isMe: map['isMe'] ?? false,
 
     );
   }
@@ -55,6 +59,7 @@ class Player {
     double? top,
     int? score,
     int? playerNo,
+    bool? isMe,
   }) {
     return Player(
       nickname: nickname ?? this.nickname,
@@ -65,10 +70,53 @@ class Player {
       top: top ?? this.top,
       score: score ?? this.score,
       playerNo: playerNo ?? this.playerNo,
+      isMe: isMe ?? this.isMe,
     );
   }
 }
 
+
+
+
+
+
+
+Player samplePlayer = Player(
+  nickname: 'Mohamed',
+  left: 300,
+  top: 500,
+  score: 0,
+  playerNo: 1,
+  socketID: '',
+  points: 0,
+  playerType: '',
+  isMe: true,
+);
+
+
+Player samplePlayer2 = Player(
+  nickname: 'Nada',
+  left: 300,
+  top: 500,
+  score: 0,
+  playerNo: 1,
+  socketID: '',
+  points: 0,
+  playerType: '',
+  isMe: false,
+);
+
+Player samplePlayer3 = Player(
+  nickname: 'Anas',
+  left: 300,
+  top: 500,
+  score: 0,
+  playerNo: 1,
+  socketID: '',
+  points: 0,
+  playerType: '',
+  isMe: false,
+);
 
 
 

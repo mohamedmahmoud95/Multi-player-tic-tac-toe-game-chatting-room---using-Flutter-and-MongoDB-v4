@@ -38,6 +38,12 @@ const playerSchema = new mongoose.Schema({
      default: 1,
    },
 
+   isMe:{
+     type: Boolean,
+     required: true,
+     default: false,
+   },
+
 });
 
 module.exports = playerSchema;
