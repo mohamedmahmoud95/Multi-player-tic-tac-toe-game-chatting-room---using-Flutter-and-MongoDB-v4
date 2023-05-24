@@ -16,6 +16,28 @@ const playerSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
+
+
+  top: {
+    type: Number,
+    default: 500,
+  },
+  left: {
+    type: Number,
+    default: 150,
+  },
+
+
+  score: {
+    type: Number,
+    default: 0,
+  },
+
+   playerNo: {
+     type: Number,
+     default: 1,
+   },
+
 });
 
 module.exports = playerSchema;
