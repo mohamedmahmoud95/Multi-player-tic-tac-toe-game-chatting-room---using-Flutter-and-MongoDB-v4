@@ -1,27 +1,18 @@
-# Multiplayer TicTacToe Game
+# Multiplayer Car Racing Game with Chatting Room
 
-A completely Responsive Multiplayer TicTacToe Game- Works on Android, iOS, Web & Desktop! 
+A completely Responsive Multiplayer Car Racing Game with Chatting Room - Works on Android, iOS, Web & Desktop! 
 
 ## Features
 - Create/Join Room
 - Play Realtime
 - Display Points
-- Round & Game Winner
+- Real-time Chatting room
 - Responsive Glow Themed UI
 - Cross Platform Game
 
-## YouTube
-I have created a tutorial based on this, do check it out on my channel [Rivaan Ranawat](https://youtu.be/Aut-wfXacXg)
-
-<p align="center">
-  <img width="600" src="https://github.com/RivaanRanawat/flutter-multiplayer-tictactoe/blob/master/screenshot.png" alt="Youtube Tutorial Image">
-</p>
-
-
 ## Installation
-After cloning this repository, migrate to ```flutter-multiplayer-tictactoe``` folder.
-
 Install dependencies (Client Side)
+change username, password and ip to yours (in the ./index.js and the socket_client.dart)
 ```bash
 flutter pub get
 ```
@@ -49,7 +40,7 @@ Head to macos/Runner and make sure the following keys are present in DebugProfil
 
 Run App
 ```bash
-flutter run // After selecting the device you want to test on
+flutter run
 ```
 
 ## Tech Used
@@ -57,9 +48,6 @@ flutter run // After selecting the device you want to test on
 
 **Client**: Flutter, Provider
     
-## Feedback
-
-If you have any feedback, please reach out to me at namanrivaan@gmail.com or on Instagram at optimalcoding.
 
 # Multi-player-Car-Racing-game-chatting-room---using-Flutter-v4
 # Multi-player-Car-Racing-game-chatting-room---using-Flutter-v4
