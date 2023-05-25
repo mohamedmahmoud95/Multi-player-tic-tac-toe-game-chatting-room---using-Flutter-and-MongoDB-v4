@@ -18,14 +18,14 @@ class Scoreboard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                roomDataProvider.player1.nickname,
+                roomDataProvider.thisPlayer.nickname,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                roomDataProvider.player1.points.toInt().toString(),
+                roomDataProvider.thisPlayer.points.toInt().toString(),
                 style: const TextStyle(
                   fontSize: 20,
                   color: Colors.white,

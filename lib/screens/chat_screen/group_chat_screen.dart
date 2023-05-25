@@ -1,8 +1,15 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:socket_io_client/src/socket.dart';
 
 import '../../../models/message.dart';
 import '../../models/player.dart';
+import '../../provider/room_data_provider.dart';
+import '../../resources/socket_client.dart';
+import '../../resources/socket_methods.dart';
 import '../../widgets/TextInputField.dart';
 import 'components/message_bubble.dart';
 
@@ -17,14 +24,28 @@ class GroupChatScreen extends StatefulWidget {
 
 class _GroupChatScreenState extends State<GroupChatScreen> {
   TextEditingController _controller = TextEditingController();
-  List <Message> messages = [
-    Message(text: 'Hey everyone!', sender: samplePlayer3),
-    Message(text: 'Hey How are you!', sender: samplePlayer2),
-    Message(text: 'All good, thank you!', sender: samplePlayer),
-  ];
+  //
+  // final _socketClient = SocketClient.instance.socket!;
+  // Socket get socketClient => _socketClient;
+  final SocketMethods _socketMethods = SocketMethods();
+
+  void addMessage (Message message, RoomDataProvider roomDataProvider)
+  {
+    _socketMethods.addMessage(message, roomDataProvider.roomData['_id'],);
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _socketMethods.updateRoomListener(context);
+    _socketMethods.messageAddedListener(context);
+  }
 
   @override
   Widget build(BuildContext context) {
+    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -38,7 +59,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
             Expanded(
               child: ListView(
                    children:
-                   messages.map((message) => MessageBubble(message: message)).toList(),
+                   roomDataProvider.messages.map((message) => MessageBubble(message: message)).toList(),
               ),
             ),
 
@@ -56,7 +77,9 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                     icon:  Icon(Icons.send, color: Colors.grey[350],),
                     onPressed: () {
                       setState(() {
-                      messages.add(Message(text: _controller.text, sender: samplePlayer));
+                        Message newMessage = Message (text: _controller.text, sender: roomDataProvider.thisPlayer);
+                      //  addMessage ( newMessage, roomDataProvider);
+                        roomDataProvider.messages.add(newMessage);
                       });
                     },
                   ),

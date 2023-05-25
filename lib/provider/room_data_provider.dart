@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mp_tictactoe/models/player.dart';
 
+import '../models/message.dart';
+
 class RoomDataProvider extends ChangeNotifier {
   Map<String, dynamic> _roomData = {};
   List<String> _displayElement = ['', '', '', '', '', '', '', '', ''];
@@ -23,8 +25,10 @@ class RoomDataProvider extends ChangeNotifier {
   Map<String, dynamic> get roomData => _roomData;
   List<String> get displayElements => _displayElement;
   int get filledBoxes => _filledBoxes;
-  Player get player1 => _player1;
+  Player get thisPlayer => _player1;
   Player get player2 => _player2;
+
+  List <Message> messages = [];
 
   void updateRoomData(Map<String, dynamic> data) {
     _roomData = data;
@@ -49,5 +53,11 @@ class RoomDataProvider extends ChangeNotifier {
 
   void setFilledBoxesTo0() {
     _filledBoxes = 0;
+  }
+
+  void updateMessages(Message newMessage)
+  {
+    messages.add(newMessage);
+    notifyListeners();
   }
 }

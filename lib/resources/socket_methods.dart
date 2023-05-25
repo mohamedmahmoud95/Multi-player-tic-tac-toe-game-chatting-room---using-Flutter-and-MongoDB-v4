@@ -7,6 +7,8 @@ import 'package:mp_tictactoe/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
+import '../models/message.dart';
+
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
 
@@ -37,6 +39,14 @@ class SocketMethods {
         'roomId': roomId,
       });
     }
+  }
+
+  void addMessage(Message message, String roomId) {
+    _socketClient.emit('messageAdded', {
+      'messageText': message.text,
+      'sender': message.sender,
+      'roomId': roomId,
+    });
   }
 
   // LISTENERS
@@ -83,7 +93,7 @@ class SocketMethods {
   void tappedListener(BuildContext context) {
     _socketClient.on('tapped', (data) {
       RoomDataProvider roomDataProvider =
-          Provider.of<RoomDataProvider>(context, listen: false);
+      Provider.of<RoomDataProvider>(context, listen: false);
       roomDataProvider.updateDisplayElements(
         data['index'],
         data['choice'],
@@ -97,8 +107,8 @@ class SocketMethods {
   void pointIncreaseListener(BuildContext context) {
     _socketClient.on('pointIncrease', (playerData) {
       var roomDataProvider =
-          Provider.of<RoomDataProvider>(context, listen: false);
-      if (playerData['socketID'] == roomDataProvider.player1.socketID) {
+      Provider.of<RoomDataProvider>(context, listen: false);
+      if (playerData['socketID'] == roomDataProvider.thisPlayer.socketID) {
         roomDataProvider.updatePlayer1(playerData);
       } else {
         roomDataProvider.updatePlayer2(playerData);
@@ -112,4 +122,19 @@ class SocketMethods {
       Navigator.popUntil(context, (route) => false);
     });
   }
+
+  void messageAddedListener(BuildContext context)
+  {
+    _socketClient.on('messageAddedListener', (data) {
+      RoomDataProvider roomDataProvider =
+      Provider.of<RoomDataProvider>(context, listen: false);
+      roomDataProvider.updateMessages(
+        Message(text: data['messageText'], sender:  data['sender'],)
+      );
+      roomDataProvider.updateRoomData(data['room']);
+    });
+  }
+
+
+
 }

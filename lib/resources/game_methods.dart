@@ -77,10 +77,10 @@ class GameMethods {
     }
 
     if (winner != '') {
-      if (roomDataProvider.player1.playerType == winner) {
-        showGameDialog(context, '${roomDataProvider.player1.nickname} won!');
+      if (roomDataProvider.thisPlayer.playerType == winner) {
+        showGameDialog(context, '${roomDataProvider.thisPlayer.nickname} won!');
         socketClent.emit('winner', {
-          'winnerSocketId': roomDataProvider.player1.socketID,
+          'winnerSocketId': roomDataProvider.thisPlayer.socketID,
           'roomId': roomDataProvider.roomData['_id'],
         });
       } else {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mp_tictactoe/provider/room_data_provider.dart';
 import 'package:mp_tictactoe/resources/socket_methods.dart';
+import 'package:mp_tictactoe/screens/chat_screen/group_chat_screen.dart';
 import 'package:mp_tictactoe/views/scoreboard.dart';
 import 'package:mp_tictactoe/views/tictactoe_board.dart';
 import 'package:mp_tictactoe/views/waiting_lobby.dart';
@@ -34,15 +35,17 @@ class _GameScreenState extends State<GameScreen> {
       body: roomDataProvider.roomData['isJoin']
           ? const WaitingLobby()
           : SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const Scoreboard(),
-                  const TicTacToeBoard(),
-                  Text(
-                      '${roomDataProvider.roomData['turn']['nickname']}\'s turn'),
-                ],
-              ),
+              child:  GroupChatScreen(),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     GroupChatScreen()
+              //  //   const Scoreboard(),
+              //   //  const TicTacToeBoard(),
+              //     // Text(
+              //     //     '${roomDataProvider.roomData['turn']['nickname']}\'s turn'),
+              //   ],
+              // ),
             ),
     );
   }

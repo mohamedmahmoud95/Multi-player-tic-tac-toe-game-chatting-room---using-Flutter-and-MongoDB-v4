@@ -4,7 +4,7 @@ const http = require("http");
 const mongoose = require("mongoose");
 
 const app = express();
-const port = process.env.PORT || 500;
+const port = process.env.PORT || 2650;
 var server = http.createServer(app);
 const Room = require("./models/room");
 var io = require("socket.io")(server);
@@ -96,6 +96,24 @@ io.on("connection", (socket) => {
       console.log(e);
     }
   });
+
+
+  socket.on("messageAdded", async ({ messageText, sender, roomId}) => {
+    try {
+      let room = await Room.findById(roomId);
+
+      room.messages.push((messageText, sender));
+      room = await room.save();
+      io.to(roomId).emit("messageAddedListener", {
+        messageText,
+        sender,
+        room,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
 
   socket.on("winner", async ({ winnerSocketId, roomId }) => {
     try {
