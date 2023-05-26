@@ -40,6 +40,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
     super.initState();
     _socketMethods.updateRoomListener(context);
     _socketMethods.messageAddedListener(context);
+    _socketMethods.updatePlayersStateListener(context);
   }
 
   @override
@@ -79,7 +80,7 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                       setState(() {
                         Message newMessage = Message (text: _controller.text, sender: roomDataProvider.thisPlayer);
                         addMessage ( newMessage, roomDataProvider); //add to remote
-                        roomDataProvider.messages.add(newMessage); //add to local
+                      //  roomDataProvider.messages.add(newMessage); //add to local
                       });
                     },
                   ),

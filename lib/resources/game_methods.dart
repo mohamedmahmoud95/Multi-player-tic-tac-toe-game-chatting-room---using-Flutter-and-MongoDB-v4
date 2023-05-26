@@ -83,15 +83,19 @@ class GameMethods {
           'winnerSocketId': roomDataProvider.thisPlayer.socketID,
           'roomId': roomDataProvider.roomData['_id'],
         });
-      } else {
-        showGameDialog(context, '${roomDataProvider.player2.nickname} won!');
-        socketClent.emit('winner', {
-          'winnerSocketId': roomDataProvider.player2.socketID,
-          'roomId': roomDataProvider.roomData['_id'],
-        });
+      }
+
+      // else {
+      //   // showGameDialog(context, '${roomDataProvider.player2.nickname} won!');
+      //   // socketClent.emit('winner', {
+      //   //   'winnerSocketId': roomDataProvider.player2.socketID,
+      //   //   'roomId': roomDataProvider.roomData['_id'],
+      //   }
+
+     // );
       }
     }
-  }
+  
 
   void clearBoard(BuildContext context) {
     RoomDataProvider roomDataProvider =

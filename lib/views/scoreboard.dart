@@ -39,20 +39,26 @@ class Scoreboard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                roomDataProvider.player2.nickname,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                roomDataProvider.player2.points.toInt().toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
+              // Text(
+              //   //**************************************************************//
+              //   //**************************************************************//
+              //
+              //   //    roomDataProvider.player2.nickname,
+              //   style: const TextStyle(
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+              // Text(
+              //   //**************************************************************//
+              //   //**************************************************************//
+              //
+              //   //  roomDataProvider.player2.points.toInt().toString(),
+              //   style: const TextStyle(
+              //     fontSize: 20,
+              //     color: Colors.white,
+              //   ),
+            //  ),
             ],
           ),
         ),

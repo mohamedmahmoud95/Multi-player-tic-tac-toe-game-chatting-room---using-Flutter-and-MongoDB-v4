@@ -7,7 +7,7 @@ class Player {
   double? top;
   int? score;
   int? playerNo;
-  final bool isMe;
+  bool? isMe;
 
   Player({
     required this.nickname,
@@ -18,7 +18,7 @@ class Player {
     this.top,
     this.score,
     this.playerNo,
-    required this.isMe,
+    this.isMe,
   });
 
   Map<String, dynamic> toMap() {

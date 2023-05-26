@@ -15,21 +15,25 @@ class RoomDataProvider extends ChangeNotifier {
     isMe: true,
   );
 
-  Player _player2 = Player(
-    nickname: '',
-    socketID: '',
-    points: 0,
-    playerType: 'O',
-    isMe: false,
-  );
+  // Player _player2 = Player(
+  //   nickname: '',
+  //   socketID: '',
+  //   points: 0,
+  //   playerType: 'O',
+  //   isMe: false,
+  // );
 
   Map<String, dynamic> get roomData => _roomData;
   List<String> get displayElements => _displayElement;
   int get filledBoxes => _filledBoxes;
   Player get thisPlayer => _player1;
-  Player get player2 => _player2;
+  //Player get player2 => _player2;
 
   List <Message> messages = [];
+
+  List<Player> players = [];
+
+
 
   void updateRoomData(Map<String, dynamic> data) {
     _roomData = data;
@@ -41,8 +45,10 @@ class RoomDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  //**************************************************************//
   void updatePlayer2(Map<String, dynamic> player2Data) {
-    _player2 = Player.fromMap(player2Data);
+   // _player2 = Player.fromMap(player2Data);
     notifyListeners();
   }
 
@@ -60,6 +66,19 @@ class RoomDataProvider extends ChangeNotifier {
   {
     messages.add(newMessage);
     debugPrint("new message was added");
+    notifyListeners();
+  }
+
+  void updatePlayers(List<Player> updatedPlayersList)
+  {
+    players.clear();
+
+    for (Player player in updatedPlayersList)
+      {
+        players.add(player);
+        debugPrint(player.nickname);
+      }
+    debugPrint("new player was added");
     notifyListeners();
   }
 }

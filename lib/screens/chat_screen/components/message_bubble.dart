@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../models/message.dart';
 import '../../../constants/project_colors.dart';
 import '../../../main.dart';
 import '../../../models/player.dart';
+import '../../../provider/room_data_provider.dart';
 
 class MessageBubble extends StatelessWidget {
   final Message message;
@@ -12,7 +14,9 @@ class MessageBubble extends StatelessWidget {
   const MessageBubble({required this.message});
   @override
   Widget build(BuildContext context) {
-    bool isMe = (message.sender == samplePlayer);
+    RoomDataProvider roomDataProvider = Provider.of<RoomDataProvider>(context);
+
+    bool isMe = (message.sender == roomDataProvider.thisPlayer);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -52,7 +56,7 @@ class MessageBubble extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.blue.shade900,
             child:  Text(
-              message.sender.nickname!,
+              message.sender.nickname,
               style: const TextStyle(
                 fontWeight: FontWeight.normal,
                 color: Colors.white,
@@ -69,7 +73,7 @@ class MessageBubble extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.grey[350],
                   child: Text(
-                    message.sender.nickname!,
+                    message.sender.nickname,
                     style: const TextStyle(
                       fontWeight: FontWeight.normal,
                       color: backgroundColor,

@@ -9,6 +9,9 @@ import 'package:socket_io_client/socket_io_client.dart';
 
 import '../models/message.dart';
 import '../models/player.dart';
+import '../models/player.dart';
+import '../models/player.dart';
+import '../models/player.dart';
 
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
@@ -74,13 +77,40 @@ class SocketMethods {
   }
 
   void updatePlayersStateListener(BuildContext context) {
-    _socketClient.on('updatePlayers', (playerData) {
-      Provider.of<RoomDataProvider>(context, listen: false).updatePlayer1(
-        playerData[0],
+
+    _socketClient.on('updatePlayers', (playerDataList2) {
+
+      List<dynamic> playerDataList = playerDataList2;
+
+      // Convert the received data to a list of Player instances
+        List<Player> players = playerDataList.map((playerData) => Player.fromJson(playerData)).toList();
+
+        // Iterate over the players and perform actions as needed
+        for (Player player in players) {
+          debugPrint( player.socketID);
+
+          if (_socketClient.id == player.socketID) {
+            // The current player is the same as the current client
+            // Perform actions specific to the current client
+            player.isMe = true;
+
+          } else {
+            // The current player is not the same as the current client
+            // Perform actions for other players
+            player.isMe = false;
+          }
+
+      }
+
+      Provider.of<RoomDataProvider>(context, listen: false).updatePlayers(
+        players,
       );
-      Provider.of<RoomDataProvider>(context, listen: false).updatePlayer2(
-        playerData[1],
-      );
+      // Provider.of<RoomDataProvider>(context, listen: false).updatePlayer1(
+      //   playerData[0],
+      // );
+      // Provider.of<RoomDataProvider>(context, listen: false).updatePlayer2(
+      //   playerData[1],
+      // );
     });
   }
 
