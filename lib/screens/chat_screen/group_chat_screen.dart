@@ -78,8 +78,8 @@ class _GroupChatScreenState extends State<GroupChatScreen> {
                     onPressed: () {
                       setState(() {
                         Message newMessage = Message (text: _controller.text, sender: roomDataProvider.thisPlayer);
-                      //  addMessage ( newMessage, roomDataProvider);
-                        roomDataProvider.messages.add(newMessage);
+                        addMessage ( newMessage, roomDataProvider); //add to remote
+                        roomDataProvider.messages.add(newMessage); //add to local
                       });
                     },
                   ),
