@@ -11,7 +11,8 @@ class RoomDataProvider extends ChangeNotifier {
     nickname: '',
     socketID: '',
     points: 0,
-    playerType: 'X', isMe: true,
+    playerType: 'X',
+    isMe: true,
   );
 
   Player _player2 = Player(
@@ -58,6 +59,7 @@ class RoomDataProvider extends ChangeNotifier {
   void updateMessages(Message newMessage)
   {
     messages.add(newMessage);
+    debugPrint("new message was added");
     notifyListeners();
   }
 }

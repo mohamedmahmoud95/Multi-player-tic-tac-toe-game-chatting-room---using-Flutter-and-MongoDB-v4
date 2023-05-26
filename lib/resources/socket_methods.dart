@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 import '../models/message.dart';
+import '../models/player.dart';
 
 class SocketMethods {
   final _socketClient = SocketClient.instance.socket!;
@@ -126,10 +127,11 @@ class SocketMethods {
   void messageAddedListener(BuildContext context)
   {
     _socketClient.on('messageAddedListener', (data) {
+      Player player = Player.fromJson( data['sender']);
       RoomDataProvider roomDataProvider =
       Provider.of<RoomDataProvider>(context, listen: false);
       roomDataProvider.updateMessages(
-        Message(text: data['messageText'], sender:  data['sender'],)
+        Message(text: data['messageText'], sender:  player,)
       );
       roomDataProvider.updateRoomData(data['room']);
     });

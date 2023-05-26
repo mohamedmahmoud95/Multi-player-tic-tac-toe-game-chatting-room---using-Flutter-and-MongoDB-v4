@@ -35,6 +35,32 @@ class Player {
     };
   }
 
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nickname': nickname,
+      'socketID': socketID,
+      'points': points,
+      'playerType': playerType,
+      'left':left,
+      'top':top,
+      'score':score,
+      'playerNo':playerNo,
+      'isMe': isMe,
+    };
+  }
+
+  factory Player.fromJson(Map<String, dynamic> json) {
+    return Player(
+      socketID: json['socketID'],
+      nickname: json['nickname'],
+      playerType: json['playerType'],
+      points:  json['points'],
+      isMe:json['isMe'],
+    );
+  }
+
+
   factory Player.fromMap(Map<String, dynamic> map) {
     return Player(
       nickname: map['nickname'] ?? '',
